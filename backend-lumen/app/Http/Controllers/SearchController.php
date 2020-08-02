@@ -30,6 +30,7 @@ class SearchController extends Controller
        
         return response()->json([
             'nextPageToken' => $content->nextPageToken,
+            'prevPageToken' => $content->prevPageToken ?? null,
             'pageInfo' => $content->pageInfo,
             'videos' =>  $content->items,
         ]);

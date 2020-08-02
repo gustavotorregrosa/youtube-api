@@ -9,7 +9,6 @@ class VideosList extends Component {
 
     limitChars = (str, nChars) => {
         if(str.length > nChars){
-            console.log("bateu aqui..")
             return str.substring(0, nChars) +  "..."
         }
 
