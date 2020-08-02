@@ -23,14 +23,16 @@ class VideosList extends Component {
         }
 
         return videos.map(video => (
-            <div className="col l4 m6 s 12">
+            <div className="col l4 m6 s12">
                 <div class="card">
                     <div class="card-image">
                         <img src={video.snippet.thumbnails.medium.url} />
                         <span class="card-title">{this.limitChars(video.snippet.title, 30)}</span>
                     </div>
-                    <div class="card-content">
-                        <p>{this.limitChars(video.snippet.description, 140)}</p>
+                    <div class="card-content" style={{
+                        height: '10em'
+                    }}>
+                        <p>{this.limitChars(video.snippet.description, 120)}</p>
                     </div>
                     <div class="card-action">
                         <a href={"https://www.youtube.com/watch?v="+ video.id.videoId} target="_blank" >YouTube</a>

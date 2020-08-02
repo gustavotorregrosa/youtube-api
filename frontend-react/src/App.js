@@ -19,7 +19,7 @@ class App extends React.Component {
     loading: false
   }
 
-  doSearch = (pageToken = null) => {
+  _doSearch = (pageToken) => {
     this.setState({
       loading: true
     })
@@ -31,6 +31,15 @@ class App extends React.Component {
     fetch(url).then(result => result.json()).then(result => {
       this.updateState(result)
     })
+  }
+
+  doSearch = (pageToken = null) => {
+    this.setState({
+      page: 1
+
+    })
+    this._doSearch(pageToken)
+
   }
 
   updateState = result => {
@@ -49,18 +58,18 @@ class App extends React.Component {
     this.setState({
       page
     })
-    this.doSearch(this.state.nextPageToken)
+    this._doSearch(this.state.nextPageToken)
 
   }
 
 
 
   searchPrevPage = () => {
-    const page = this.state.page - 1
+    const page = this.state.page - 1 > 0 ? this.state.page -1 : 1
     this.setState({
       page
     })
-    this.doSearch(this.state.prevPageToken)
+    this._doSearch(this.state.prevPageToken)
 
   }
 

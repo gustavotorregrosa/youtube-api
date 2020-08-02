@@ -6,10 +6,6 @@ class SearchBar extends Component {
         super(props)
     }
 
-    componentDidMount = () => {
-        console.log(this.props)
-    }
-
     updateQueryString = e => {
         e.preventDefault()
         this.props.updateQueryString(e.target.value)
@@ -59,7 +55,7 @@ class SearchBar extends Component {
                             <div className="col s6">
                                 <p>Results: {this.props.parentState.results}  </p>
                                 <p>Page: {this.props.parentState.page}</p>
-                            <div>
+                                <div>
                                     <button onClick={e => this.searchPrevPage(e)} style={{marginRight: '1em'}} className="btn-small waves-effect waves-light"><i className="material-icons">chevron_left</i></button> 
                                     <button onClick={e => this.searchNextPage(e)} className="btn-small waves-effect waves-light"><i className="material-icons">chevron_right</i></button> 
                                 </div>
