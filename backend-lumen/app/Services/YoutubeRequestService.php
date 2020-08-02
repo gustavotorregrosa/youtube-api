@@ -17,7 +17,7 @@ class YoutubeRequestService {
         return $this->tokenService->getValidToken();
     }
 
-    public function videos($queryString){
+    public function videos($queryString, $pageToken){
 
         $token =  $this->tokenService->getValidToken();
         $token = "Bearer " . $token;
@@ -25,9 +25,14 @@ class YoutubeRequestService {
             "Authorization: ".$token,
             "Accept: application/json"
         ];
-        
+
+        $url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=12&type=video&q=".$queryString;
+        if($pageToken){
+            $url .= "&pageToken=".$pageToken;
+        }
+
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=".$queryString);
+        curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         $output = curl_exec($ch);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Services\YoutubeRequestService;
 
 
@@ -21,9 +22,11 @@ class SearchController extends Controller
         $this->youtubeService = $youtubeService;
     }
 
-    public function videos($searchQuery){
+    public function videos(Request $request){
 
-        $content = $this->youtubeService->videos($searchQuery);
+        $searchQuery = $request->input('qString');
+        $pageToken = $request->input('pageToken') ?? null;
+        $content = $this->youtubeService->videos($searchQuery, $pageToken);
        
         return response()->json([
             'nextPageToken' => $content->nextPageToken,

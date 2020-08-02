@@ -15,4 +15,4 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/videos/{searchQuery}', 'SearchController@videos');
+$router->get('/videos', 'SearchController@videos');
